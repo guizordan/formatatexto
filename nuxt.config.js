@@ -13,6 +13,11 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+  css: [
+    { src: 'bulma/bulma.sass', lang: 'sass' }
+  ],
+  
   /*
   ** Customize the progress bar color
   */
