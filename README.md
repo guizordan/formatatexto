@@ -1,6 +1,6 @@
 # formatar-texto
 
-> Cinto de utilidades para formatação de textos hospedado em uma moderna aplicação web
+> Nuxt.js project
 
 ## Build Setup
 

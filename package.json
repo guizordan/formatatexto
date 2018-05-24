@@ -1,8 +1,8 @@
 {
   "name": "formatar-texto",
   "version": "1.0.0",
-  "description": "Cinto de utilidades para formatação de textos hospedado em uma moderna aplicação web",
-  "author": "billzee",
+  "description": "Nuxt.js project",
+  "author": "Guilherme Zordan <guilhermezordan@outlook.com>",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -13,10 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "bulma": "^0.7.1",
-    "node-sass": "^4.9.0",
-    "nuxt": "^1.0.0",
-    "sass-loader": "^7.0.1"
+    "nuxt": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

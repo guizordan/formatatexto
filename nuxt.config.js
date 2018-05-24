@@ -7,17 +7,15 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Cinto de utilidades para formatação de textos hospedado em uma moderna aplicação web' }
+      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://unpkg.com/spectre.css/dist/spectre.min.css' },
+      { rel: 'stylesheet', href: 'https://unpkg.com/spectre.css/dist/spectre-exp.min.css' },
+      { rel: 'stylesheet', href: 'https://unpkg.com/spectre.css/dist/spectre-icons.min.css' }
     ]
   },
-
-  css: [
-    { src: 'bulma/bulma.sass', lang: 'sass' }
-  ],
-  
   /*
   ** Customize the progress bar color
   */
