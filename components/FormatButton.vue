@@ -1,29 +1,36 @@
 <template>
-  <button ref="button" @click="activate" class="btn">{{label}}</button>
+  <button @click="toggle" :class="{active : 'active'}" class="btn">{{label}}</button>
 </template>
 
 <script>
 export default {
+  props: ['original_value', 'label'],
+
   data() {
     return {
-      active: false
+      active: false,
+      previous_value: this.original_value
     };
   },
 
-  props: ['label'],
-
   methods: {
-    activate: function() {
+    toggle: function() {
       if (this.active) {
-        this.$refs.button.classList.remove("active");
-        this.$emit("deactivate", input);
+        this.$emit("deactivate", this.previous_value);
         this.active = false;
       } else {
-        this.$refs.button.classList.add("active");
+        this.previous_value = this.original_value;
         this.$emit("activate");
         this.active = true;
       }
     }
   }
+
+  ,watch:{
+    original_value(val){
+      this.previous_value = val;
+    }
+  }
+  
 };
 </script>

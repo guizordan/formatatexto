@@ -14,12 +14,15 @@
         </div>
 
         <div class="column col-12 mb-2">
-          <button ref="upcase" @click="upcase" class="btn">Capitalizar</button>
-          <button ref="downcase" @click="downcase" class="btn ml-2">Minimizar</button>
-          <button ref="remove_whitespaces" @click="remove_whitespaces" class="btn ml-2">Remove Espaços</button>
-          <format-button label="botao"></format-button>
-        </div>
+          <format-button @deactivate="previous_value" @activate="upcase" 
+          :original_value="input" label="Capitalizar"></format-button>
+          
+          <format-button @deactivate="previous_value" @activate="downcase" 
+          :original_value="input" label="Minimizar" class="ml-2"></format-button>
 
+          <format-button @deactivate="previous_value" @activate="remove_whitespaces" 
+          :original_value="input" label="Remove Espaços" class="ml-2"></format-button>
+        </div>
 
         <div class="column col-12">
             <div class="form-group">
@@ -41,6 +44,10 @@
 import FormatButton from "~/components/FormatButton.vue"
 
 export default {
+  components: {
+    FormatButton
+  },
+
   data() {
     return {
       input: null,
@@ -48,12 +55,8 @@ export default {
     };
   },
 
-  components: {
-    FormatButton
-  },
-
   mounted() {
-    console.log(this.$refs);
+    // console.log(this.$refs);
   },
 
   methods: {
@@ -74,7 +77,11 @@ export default {
       }
 
       this.output = output.join("");
-      this.$refs.remove_whitespaces.classList.add("active");
+    },
+
+    previous_value: function(prev_val){
+      console.log(prev_val);
+      this.output = prev_val;
     }
   }
 };
