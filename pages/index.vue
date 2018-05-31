@@ -13,16 +13,11 @@
           </div>
         </div>
 
-        <div class="column col-12 mb-2">
-          <format-button @deactivate="previous_value" @activate="upcase" 
-          :original_value="input" label="Capitalizar"></format-button>
-          
-          <format-button @deactivate="previous_value" @activate="downcase" 
-          :original_value="input" label="Minimizar" class="ml-2"></format-button>
+        
+        <capitalize :input="input" :output.sync="output"></capitalize>
 
-          <format-button @deactivate="previous_value" @activate="remove_whitespaces" 
-          :original_value="input" label="Remove Espaços" class="ml-2"></format-button>
-        </div>
+        <!-- <format-button @deactivate="previous_value" @activate="remove_whitespaces" 
+        :original_value="input" label="Remove Espaços" class="ml-2"></format-button> -->
 
         <div class="column col-12">
             <div class="form-group">
@@ -42,16 +37,18 @@
 
 <script>
 import FormatButton from "~/components/FormatButton.vue"
+import Capitalize from "~/components/Capitalize.vue"
 
 export default {
   components: {
-    FormatButton
+    FormatButton,
+    Capitalize
   },
 
   data() {
     return {
-      input: null,
-      output: null
+      input: 'Testando String',
+      output: ''
     };
   },
 
@@ -60,13 +57,6 @@ export default {
   },
 
   methods: {
-    upcase: function() {
-      this.output = this.input.toUpperCase();
-    },
-
-    downcase: function() {
-      this.output = this.input.toLowerCase();
-    },
 
     remove_whitespaces: function() {
       var output = [];
