@@ -1,9 +1,14 @@
 <template>
-  <div class="column col-12 mb-2">
-      <format-button :is-active.sync="is_upcase_active" label="Capitalizar"></format-button>
-      
-      <format-button :is-active.sync="is_downcase_active" label="Minimizar" class="ml-2"></format-button>
-  </div>
+    <div class="columns text-center">
+      <div class="col-12">
+        <small>Capitalização</small>
+      </div>
+      <div class="col-12">
+        <format-button :is-active.sync="is_upcase_active" label="AAA"></format-button>
+        <format-button :is-active.sync="is_downcase_active" label="aaa" class="ml-2"></format-button>
+        <format-button :is-active.sync="is_emocase_active" label="aAa" class="ml-2"></format-button>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -16,7 +21,7 @@ export default {
     return {
       is_upcase_active: false,
       is_downcase_active: false,
-      previous_output: this.input
+      is_emocase_active: false
     };
   },
 
@@ -25,44 +30,62 @@ export default {
   },
 
   methods: {
-    activate_upcase: function(active) {
-      this.$emit('update:output', this.input.toUpperCase());
+    activate_upcase: function() {
+      this.$emit("update:output", this.input.toUpperCase());
     },
 
-    activate_downcase: function(active) {
-      this.$emit('update:output', this.input.toLowerCase());
+    activate_downcase: function() {
+      this.$emit("update:output", this.input.toLowerCase());
     },
 
-    deactivate_upcase: function(){
-      if(this.is_upcase_active){
-        this.is_upcase_active = false;
-        this.$emit('update:output', this.previous_output || this.input);
+    activate_emocase: function() {
+      var output = [];
+      for (let i = 0; i < this.input.length; i++) {
+        if (i % 2 == 0) output[i] = this.input[i].toLowerCase();
+        else output[i] = this.input[i].toUpperCase();
       }
+      this.$emit("update:output", output.join(''));
     },
 
-    deactivate_downcase: function(){
-      if(this.is_downcase_active){
-        this.is_downcase_active = false;
-        this.$emit('update:output', this.previous_output || this.input);
-      }
+    deactivate_all: function() {
+      if (
+        !this.is_upcase_active &&
+        !this.is_downcase_active &&
+        !this.is_emocase_active
+      )
+        this.$emit("update:output", this.input);
     }
   },
 
   watch: {
-    is_upcase_active(val){
-      if(val){
-        this.deactivate_downcase();
+    is_upcase_active(val) {
+      if (val) {
+        this.is_emocase_active = false;
+        this.is_downcase_active = false;
         this.activate_upcase();
-      } else
-        this.deactivate_upcase();
+      } else {
+        this.deactivate_all();
+      }
     },
 
-    is_downcase_active(val){
-      if(val){
-        this.deactivate_upcase();
+    is_downcase_active(val) {
+      if (val) {
+        this.is_emocase_active = false;
+        this.is_upcase_active = false;
         this.activate_downcase();
-      } else
-        this.deactivate_downcase();
+      } else {
+        this.deactivate_all();
+      }
+    },
+
+    is_emocase_active(val) {
+      if (val) {
+        this.is_upcase_active = false;
+        this.is_downcase_active = false;
+        this.activate_emocase();
+      } else {
+        this.deactivate_all();
+      }
     }
   }
 };
