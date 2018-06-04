@@ -1,11 +1,10 @@
 <template>
-  <div class="columns text-center">
-    <div class="col-12">
+  <div class="columns">
+    <div class="column col-12">
       <small>Remover espaços</small>
     </div>
-    <div class="col-12">
-      <format-button :is-active.sync="is_remove_all_active" label="Remover Todos"></format-button>
-      <format-button :is-active.sync="is_remove_extra_active" label="Remover Extra" class="ml-2"></format-button>
+    <div class="column col-12">
+      <format-button :is-active.sync="is_remove_all_active" label="Remover Espaços"></format-button>
     </div>
   </div>
 </template>
@@ -28,17 +27,6 @@ export default {
   },
 
   methods: {
-    remove_extra_whitespaces: function() {
-      var output = [];
-      for (let i = 0; i < this.input.length; i++) {
-        if (this.input[i].match(/\s/) && this.input[i + 1].match(/\s/))
-          continue;
-        else output[i] = this.input[i];
-      }
-
-      this.$emit("update:output", output.join(''));
-    },
-
     remove_all_whitespaces: function() {
       var output = [];
       for (let i = 0; i < this.input.length; i++) {

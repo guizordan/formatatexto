@@ -2,7 +2,7 @@
 
 <div class="container mt-2">
   <div class="columns">
-    <div class="column col-sm-12 col-6 col-ml-auto col-mr-auto">
+    <div class="column col-4 col-xl-8 col-lg-6 col-md-10 col-sm-12 col-mx-auto">
         
       <div class="columns">
         
@@ -13,23 +13,25 @@
           </div>
         </div>
 
-        <div class="column col-12">
+        <div class="column col-12 text-center">
+          <format :input.sync="input" :output.sync="output"></format>
+        </div>
 
-          <div class="columns mb-2">
-            <div class="column col-4">
+        <div class="column col-12 mt-3 mb-2">
+          <strong>Mais Opções</strong>
+
+          <div class="columns">
+            <div class="column col-3 col-lg-6 col-sm-12">
               <capitalize :input="input" :output.sync="output"></capitalize>
             </div>
 
-            <div class="column col-8">
-              <spacing :input="input" :output.sync="output"></spacing>
-            </div>
           </div>
-
         </div>
 
         <div class="column col-12">
           <div class="form-group">
             <textarea v-model="output" class="form-input" rows="5"></textarea>
+            <button :disabled="output.length == 0" class="btn btn-block btn-success">Copiar</button>
           </div>
         </div>
 
@@ -42,18 +44,20 @@
 </template>
 
 <script>
-import Capitalize from "~/components/Capitalize.vue"
-import Spacing from "~/components/Spacing.vue"
+import Capitalize from '~/components/Capitalize.vue';
+import Spacing from '~/components/Spacing.vue';
+import Format from '~/components/Format.vue';
 
 export default {
   components: {
     Capitalize,
-    Spacing
+    Spacing,
+    Format
   },
 
   data() {
     return {
-      input: 'Testando String',
+      input: 'Testando.string',
       output: ''
     };
   },

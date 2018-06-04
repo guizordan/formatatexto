@@ -1,21 +1,21 @@
 <template>
-    <div class="columns text-center">
-      <div class="col-12">
-        <small>Capitalização</small>
-      </div>
-      <div class="col-12">
-        <format-button :is-active.sync="is_upcase_active" label="AAA"></format-button>
-        <format-button :is-active.sync="is_downcase_active" label="aaa" class="ml-2"></format-button>
-        <format-button :is-active.sync="is_emocase_active" label="aAa" class="ml-2"></format-button>
-      </div>
+  <div class="columns">
+    <div class="column col-12">
+      <small>Capitalização</small>
     </div>
+    <div class="column col-12">
+      <format-button :is-active.sync="is_upcase_active" label="AAA"></format-button>
+      <format-button :is-active.sync="is_downcase_active" label="aaa" class="ml-2"></format-button>
+      <format-button :is-active.sync="is_emocase_active" label="aAa" class="ml-2"></format-button>
+    </div>
+  </div>
 </template>
 
 <script>
-import FormatButton from "~/components/FormatButton.vue";
+import FormatButton from '~/components/FormatButton.vue';
 
 export default {
-  props: ["input", "output"],
+  props: ['input', 'output'],
 
   data() {
     return {
@@ -31,11 +31,11 @@ export default {
 
   methods: {
     activate_upcase: function() {
-      this.$emit("update:output", this.input.toUpperCase());
+      this.$emit('update:output', this.input.toUpperCase());
     },
 
     activate_downcase: function() {
-      this.$emit("update:output", this.input.toLowerCase());
+      this.$emit('update:output', this.input.toLowerCase());
     },
 
     activate_emocase: function() {
@@ -44,7 +44,7 @@ export default {
         if (i % 2 == 0) output[i] = this.input[i].toLowerCase();
         else output[i] = this.input[i].toUpperCase();
       }
-      this.$emit("update:output", output.join(''));
+      this.$emit('update:output', output.join(''));
     },
 
     deactivate_all: function() {
@@ -53,7 +53,7 @@ export default {
         !this.is_downcase_active &&
         !this.is_emocase_active
       )
-        this.$emit("update:output", this.input);
+        this.$emit('update:output', this.input);
     }
   },
 

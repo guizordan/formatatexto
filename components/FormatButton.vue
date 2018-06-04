@@ -8,9 +8,8 @@ export default {
 
   methods: {
     toggle: function() {
-      this.$emit("update:isActive", !this.isActive);
+      this.$emit('update:isActive', !this.isActive);
     }
   }
-  
 };
 </script>
