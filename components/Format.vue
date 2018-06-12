@@ -22,17 +22,21 @@ export default {
         if (string[i].match(/\s/) && string[i + 1].match(/\s/)) continue;
         else output[i] = string[i];
       }
+      output =  output.join('');
 
-      return output.join('');
+      return output.trim();
     },
 
     deal_with_dots: function(string) {
-      var output = [];
-      return string.replace(/\.[a-zA-Z]/g, function(substring){
+      if (!string.match(/[A-Z]/)) {
+        string = string.replace(/[a-z]/, function(substring) {
+          return substring.toUpperCase();
+        });
+      }
+
+      return string.replace(/\.[a-zA-Z]/g, function(substring) {
         return '. ' + substring[1].toUpperCase();
       });
-
-      console.log(string);
     }
   }
 };
