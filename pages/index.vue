@@ -46,14 +46,12 @@
 
 <script>
 import Capitalize from '~/components/Capitalize.vue';
-import Spacing from '~/components/Spacing.vue';
 import Format from '~/components/Format.vue';
 import OutputTextArea from '~/components/OutputTextArea.vue';
 
 export default {
   components: {
     Capitalize,
-    Spacing,
     Format,
     OutputTextArea
   },

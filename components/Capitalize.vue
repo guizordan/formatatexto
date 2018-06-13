@@ -15,7 +15,7 @@
 import FormatButton from '~/components/FormatButton.vue';
 
 export default {
-  props: ['input', 'output', 'previousOutput'],
+  props: ['output', 'previousOutput'],
 
   data() {
     return {
@@ -31,18 +31,18 @@ export default {
 
   methods: {
     activate_upcase: function() {
-      this.$emit('update:output', this.input.toUpperCase());
+      this.$emit('update:output', this.previousOutput.toUpperCase());
     },
 
     activate_downcase: function() {
-      this.$emit('update:output', this.input.toLowerCase());
+      this.$emit('update:output', this.previousOutput.toLowerCase());
     },
 
     activate_emocase: function() {
       var output = [];
-      for (let i = 0; i < this.input.length; i++) {
-        if (i % 2 == 0) output[i] = this.input[i].toLowerCase();
-        else output[i] = this.input[i].toUpperCase();
+      for (let i = 0; i < this.previousOutput.length; i++) {
+        if (i % 2 == 0) output[i] = this.previousOutput[i].toLowerCase();
+        else output[i] = this.previousOutput[i].toUpperCase();
       }
       this.$emit('update:output', output.join(''));
     },
