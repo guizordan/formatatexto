@@ -21,12 +21,12 @@
           <strong>Mais Opções</strong>
 
           <div class="columns">
-            <div class="column col-4 col-sm-12">
-              <capitalize :previous-output="previousOutput" :input="input" :output.sync="output"></capitalize>
+            <div class="column col-4 col-md-12">
+              <capitalize :previous-output="previousOutput" :output.sync="output"></capitalize>
             </div>
 
-            <div class="column col-4 col-sm-12">
-              <capitalize :input="input" :output.sync="output"></capitalize>
+            <div class="column col-4 col-md-12">
+              <reverse :previous-output="previousOutput" :output.sync="output"></reverse>
             </div>
 
           </div>
@@ -48,11 +48,13 @@
 import Capitalize from '~/components/Capitalize.vue';
 import Format from '~/components/Format.vue';
 import OutputTextArea from '~/components/OutputTextArea.vue';
+import Reverse from '~/components/Reverse.vue';
 
 export default {
   components: {
     Capitalize,
     Format,
+    Reverse,
     OutputTextArea
   },
 
@@ -63,14 +65,6 @@ export default {
       output: ''
     };
   }
-
-  // events: {
-  //   update: {
-  //     previousOutput(){
-  //       console.log('previousValue'); 
-  //     }
-  //   }
-  // }
 
 };
 </script>

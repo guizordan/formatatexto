@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column col-12">
-      <small>Capitalização</small>
+      <small>Capitalizar</small>
     </div>
     <div class="column col-12">
       <format-button :is-active.sync="is_upcase_active" label="AAA"></format-button>
