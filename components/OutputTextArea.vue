@@ -25,7 +25,7 @@ export default {
       this.copy_label = 'Copiado!'
       
       setInterval(function(){ 
-        self.copy_label = 'Copiar'
+        self.copy_label = 'Copiar';
       }, 2000);
     }
   }

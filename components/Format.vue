@@ -10,10 +10,13 @@ export default {
 
   methods: {
     format: function() {
-      var formatted = this.remove_extra_whitespaces(this.input);
+      var formatted;
+      formatted = this.remove_extra_whitespaces(this.input);
+      formatted = this.capitalize_first_letter(formatted);
       formatted = this.deal_with_dots(formatted);
+
       this.$emit('update:output', formatted);
-      this.$emit('update:input', formatted);
+      this.$emit('update:previousOutput', formatted);
     },
 
     remove_extra_whitespaces: function(string) {
@@ -27,14 +30,16 @@ export default {
       return output.trim();
     },
 
-    deal_with_dots: function(string) {
-      if (!string.match(/[A-Z]/)) {
-        string = string.replace(/[a-z]/, function(substring) {
+    capitalize_first_letter: function(string){
+      if (!string.match(/[A-Z]/)){
+        return string.replace(/[a-z]/, function(substring) {
           return substring.toUpperCase();
         });
       }
+    },
 
-      return string.replace(/\.[a-zA-Z]/g, function(substring) {
+    deal_with_dots: function(string) {
+      return string.replace(/\.[a-zA-Z]/g, function(substring){
         return '. ' + substring[1].toUpperCase();
       });
     }

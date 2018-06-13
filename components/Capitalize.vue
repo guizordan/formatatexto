@@ -15,7 +15,7 @@
 import FormatButton from '~/components/FormatButton.vue';
 
 export default {
-  props: ['input', 'output'],
+  props: ['input', 'output', 'previousOutput'],
 
   data() {
     return {
@@ -53,7 +53,7 @@ export default {
         !this.is_downcase_active &&
         !this.is_emocase_active
       )
-        this.$emit('update:output', this.input);
+        this.$emit('update:output', this.previousOutput);
     }
   },
 

@@ -2,7 +2,7 @@
 
 <div class="container mt-2">
   <div class="columns">
-    <div class="column col-6 col-xl-6 col-lg-6 col-md-8 col-sm-12 col-xs-12 col-mx-auto">
+    <div class="column col-6 col-md-8 col-sm-12 col-xs-12 col-mx-auto">
         
       <div class="columns">
         
@@ -14,7 +14,7 @@
         </div>
 
         <div class="column col-12 text-center">
-          <format :input.sync="input" :output.sync="output"></format>
+          <format :input="input" :previous-output.sync="previousOutput" :output.sync="output"></format>
         </div>
 
         <div class="column col-12 mb-2">
@@ -22,7 +22,7 @@
 
           <div class="columns">
             <div class="column col-4 col-sm-12">
-              <capitalize :input="input" :output.sync="output"></capitalize>
+              <capitalize :previous-output="previousOutput" :input="input" :output.sync="output"></capitalize>
             </div>
 
             <div class="column col-4 col-sm-12">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="column col-12">
-          <Output-text-area :input="input" :output.sync="output"></Output-text-area>
+          <output-text-area :input="input" :output.sync="output"></output-text-area>
         </div>
 
       </div>
@@ -61,12 +61,18 @@ export default {
   data() {
     return {
       input: '  testando.string    aaaaaa',
+      previousOutput: '',
       output: ''
     };
-  },
-
-  mounted() {
-    // console.log(this.$refs);
   }
+
+  // events: {
+  //   update: {
+  //     previousOutput(){
+  //       console.log('previousValue'); 
+  //     }
+  //   }
+  // }
+
 };
 </script>
