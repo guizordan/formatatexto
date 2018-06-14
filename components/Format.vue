@@ -1,22 +1,25 @@
 <template>
-  <button @click="format" class="btn btn-block">
+  <button @click="format" class="btn btn-block btn-success">
     Formatar Texto!
   </button>
 </template>
 
 <script>
+import Mixins from '~/mixins/Mixins.vue';
+
 export default {
-  props: ['input', 'output'],
+  props: ['text'],
+
+  mixins: [Mixins],
 
   methods: {
     format: function() {
       var formatted;
-      formatted = this.remove_extra_whitespaces(this.input);
+      formatted = this.remove_extra_whitespaces(this.text);
       formatted = this.capitalize_first_letter(formatted);
       formatted = this.deal_with_dots(formatted);
 
-      this.$emit('update:output', formatted);
-      this.$emit('update:previousOutput', formatted);
+      this.add_format(formatted, 'format');
     },
 
     remove_extra_whitespaces: function(string) {
@@ -25,13 +28,13 @@ export default {
         if (string[i].match(/\s/) && string[i + 1].match(/\s/)) continue;
         else output[i] = string[i];
       }
-      output =  output.join('');
+      output = output.join('');
 
       return output.trim();
     },
 
-    capitalize_first_letter: function(string){
-      if (!string.match(/[A-Z]/)){
+    capitalize_first_letter: function(string) {
+      if (!string.match(/[A-Z]/)) {
         return string.replace(/[a-z]/, function(substring) {
           return substring.toUpperCase();
         });
@@ -39,7 +42,7 @@ export default {
     },
 
     deal_with_dots: function(string) {
-      return string.replace(/\.[a-zA-Z]/g, function(substring){
+      return string.replace(/\.[a-zA-Z]/g, function(substring) {
         return '. ' + substring[1].toUpperCase();
       });
     }

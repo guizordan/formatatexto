@@ -34,20 +34,22 @@ export default {
 
   methods: {
     activate_upcase: function() {
-      this.add_format(this.text.toUpperCase(), 'capitalize')
+      console.log(this.$options._componentTag)
+      this.add_format(this.text.toUpperCase())
     },
 
     activate_downcase: function() {
-      this.$emit('update:output', this.text.toLowerCase())
+      this.add_format(this.text.toLowerCase())
     },
 
     activate_emocase: function() {
-      var output = []
+      let newText = []
       for (let i = 0; i < this.text.length; i++) {
-        if (i % 2 == 0) output[i] = this.text[i].toLowerCase()
-        else output[i] = this.text[i].toUpperCase()
+        if (i % 2 == 0) newText[i] = this.text[i].toLowerCase()
+        else newText[i] = this.text[i].toUpperCase()
       }
-      this.$emit('update:output', output.join(''))
+
+      this.add_format(newText.join(''))
     },
 
     deactivate_all: function() {

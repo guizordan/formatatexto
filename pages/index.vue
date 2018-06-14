@@ -7,7 +7,7 @@
   </div>
 
   <div class="column col-12 text-center">
-    <format :input="input" :previous-output.sync="previousOutput" :output.sync="output"></format>
+    <format @add-format="addFormat" :text="text">></format>
   </div>
 
   <div class="column col-12 mt-2 mb-2">
@@ -15,18 +15,18 @@
 
     <div class="columns">
       <div class="column col-4 col-md-12">
-        <capitalize @remove-format="removeFormat" @add-format="addFormat" :text="output || input"></capitalize>
+        <capitalize @remove-format="removeFormat" @add-format="addFormat" :text="text"></capitalize>
       </div>
 
       <div class="column col-4 col-md-12">
-        <reverse :previous-output="previousOutput" :output.sync="formats[formats.length-1].val || ''"></reverse>
+        <reverse @remove-format="removeFormat" @add-format="addFormat" :text="text"></reverse>
       </div>
 
     </div>
   </div>
 
   <div class="column col-12">
-    <output-text-area :output.sync="formats[formats.length-1].val || ''"></output-text-area>
+    <output-text-area :output="text"></output-text-area>
   </div>
 </div>
 </template>
@@ -47,22 +47,27 @@ export default {
 
   data() {
     return {
-      formats: [{val: '', component: ''}],
-      input: '  testando.string    aaaaaa',
-      output: ''
+      formats: [],
+      input: '  testando.string    aaaaaa'
     };
   },
 
   methods: {
-    addFormat(payload){
-      this.formats.push(payload)
-      console.log(this.formats)
+    addFormat(payload) {
+      this.formats.push(payload);
+      console.log(this.formats);
     },
 
-    removeFormat(payload){
-      console.log(payload)
-    },
+    removeFormat(payload) {
+      console.log(payload);
+    }
   },
 
-}
+  computed: {
+    text(){
+      let newFormat = this.formats[this.formats.length - 1];
+      return newFormat && newFormat.text ? newFormat.text : this.input;
+    },
+  },
+};
 </script>
