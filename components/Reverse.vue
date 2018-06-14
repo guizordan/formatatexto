@@ -4,8 +4,8 @@
       <small>Inverter</small>
     </div>
     <div class="column col-12">
-      <format-button :is-active.sync="is_flip_active" label="Flip"></format-button>
-      <format-button :is-active.sync="is_mirror_active" label="Espelhar" class="ml-2"></format-button>
+      <format-button :is-active.sync="is_flip_active" :label="flip_label"></format-button>
+      <format-button :is-active.sync="is_mirror_active" :label="mirror_label" class="ml-2"></format-button>
     </div>
   </div>
 </template>
@@ -18,6 +18,11 @@ export default {
 
   data() {
     return {
+      flip_label: '\u0250\u0250\u0250',
+      mirror_label: 'texto'
+        .split('')
+        .reverse()
+        .join(''),
       flipTable: {
         a: '\u0250',
         b: 'q',
@@ -69,15 +74,18 @@ export default {
       this.$emit('update:output', result);
     },
 
-    mirror(){
-      this.$emit('update:output', this.previousOutput.split('').reverse().join(''));
+    mirror() {
+      this.$emit(
+        'update:output',
+        this.previousOutput
+          .split('')
+          .reverse()
+          .join('')
+      );
     },
 
     deactivate_all: function() {
-      if (
-        !this.is_flip_active &&
-        !this.is_mirror_active
-      )
+      if (!this.is_flip_active && !this.is_mirror_active)
         this.$emit('update:output', this.previousOutput);
     },
 
@@ -110,13 +118,6 @@ export default {
       } else {
         this.deactivate_all();
       }
-    }
-  },
-
-  computed: {
-    flip_label(){
-      console.log(String.fromCharCode('\u0250'));
-      return String.fromCharCode('\u0250')
     }
   }
 };

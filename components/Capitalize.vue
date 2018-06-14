@@ -12,17 +12,20 @@
 </template>
 
 <script>
-import FormatButton from '~/components/FormatButton.vue';
+import FormatButton from '~/components/FormatButton.vue'
+import Mixins from '~/mixins/Mixins.vue'
 
 export default {
-  props: ['output', 'previousOutput'],
+  props: ['text'],
+
+  mixins: [Mixins],
 
   data() {
     return {
       is_upcase_active: false,
       is_downcase_active: false,
       is_emocase_active: false
-    };
+    }
   },
 
   components: {
@@ -31,20 +34,20 @@ export default {
 
   methods: {
     activate_upcase: function() {
-      this.$emit('update:output', this.previousOutput.toUpperCase());
+      this.add_format(this.text.toUpperCase(), 'capitalize')
     },
 
     activate_downcase: function() {
-      this.$emit('update:output', this.previousOutput.toLowerCase());
+      this.$emit('update:output', this.text.toLowerCase())
     },
 
     activate_emocase: function() {
-      var output = [];
-      for (let i = 0; i < this.previousOutput.length; i++) {
-        if (i % 2 == 0) output[i] = this.previousOutput[i].toLowerCase();
-        else output[i] = this.previousOutput[i].toUpperCase();
+      var output = []
+      for (let i = 0; i < this.text.length; i++) {
+        if (i % 2 == 0) output[i] = this.text[i].toLowerCase()
+        else output[i] = this.text[i].toUpperCase()
       }
-      this.$emit('update:output', output.join(''));
+      this.$emit('update:output', output.join(''))
     },
 
     deactivate_all: function() {
@@ -53,38 +56,38 @@ export default {
         !this.is_downcase_active &&
         !this.is_emocase_active
       )
-        this.$emit('update:output', this.previousOutput);
+        this.remove_format('capitalize')
     }
   },
 
   watch: {
     is_upcase_active(val) {
       if (val) {
-        this.is_emocase_active = false;
-        this.is_downcase_active = false;
-        this.activate_upcase();
+        this.is_emocase_active = false
+        this.is_downcase_active = false
+        this.activate_upcase()
       } else {
-        this.deactivate_all();
+        this.deactivate_all()
       }
     },
 
     is_downcase_active(val) {
       if (val) {
-        this.is_emocase_active = false;
-        this.is_upcase_active = false;
-        this.activate_downcase();
+        this.is_emocase_active = false
+        this.is_upcase_active = false
+        this.activate_downcase()
       } else {
-        this.deactivate_all();
+        this.deactivate_all()
       }
     },
 
     is_emocase_active(val) {
       if (val) {
-        this.is_upcase_active = false;
-        this.is_downcase_active = false;
-        this.activate_emocase();
+        this.is_upcase_active = false
+        this.is_downcase_active = false
+        this.activate_emocase()
       } else {
-        this.deactivate_all();
+        this.deactivate_all()
       }
     }
   }
