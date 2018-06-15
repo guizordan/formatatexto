@@ -25,6 +25,10 @@
     </div>
   </div>
 
+  <div class="column col-12 mt-2 mb-2">
+    {{formats}}
+  </div>
+
   <div class="column col-12">
     <output-text-area :output="text"></output-text-area>
   </div>
@@ -54,8 +58,14 @@ export default {
 
   methods: {
     addFormat(payload) {
-      this.formats.push(payload);
-      console.log(this.formats);
+      console.log(payload, 'payload')
+      let exists = this.formats.findIndex(format => { return payload.component == format.component})
+      if(exists > -1){
+        console.log(exists)
+        this.formats[exists].text = payload.text
+      } else{
+        this.formats.push(payload)
+      }
     },
 
     removeFormat(payload) {

@@ -34,7 +34,6 @@ export default {
 
   methods: {
     activate_upcase: function() {
-      console.log(this.$options._componentTag)
       this.add_format(this.text.toUpperCase())
     },
 
